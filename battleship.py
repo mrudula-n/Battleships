@@ -277,4 +277,4 @@ def runSimulation(w, h):
 if __name__ == "__main__":
     test.testEmptyGrid()
     ## Finally, run the simulation to test it manually ##
-    # runSimulation(500, 500)
+    #runSimulation(500, 500)
