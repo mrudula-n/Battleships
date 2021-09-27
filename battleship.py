@@ -117,8 +117,8 @@ def addShips(grid, numShips):
         ship=createShip()
         if checkShip(grid,ship)==True:
             for each in ship:
-                a=each[0]
-                b=each[1]
+                column=each[0]
+                row=each[1]
                 grid[a][b]=SHIP_UNCLICKED
         count=count+1
     return grid
