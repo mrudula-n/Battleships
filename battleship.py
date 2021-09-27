@@ -62,14 +62,13 @@ Parameters: int ; int
 Returns: 2D list of ints
 '''
 def emptyGrid(rows, cols):
-    Grid=[]
+    grid=[]
     for i in range(rows):
         col = []
         for j in range(cols):
             col.append(1)
-        Grid.append(col)
-    print(Grid)
-    return Grid
+        grid.append(col)
+    return grid
 
 
 '''
@@ -78,7 +77,14 @@ Parameters: no parameters
 Returns: 2D list of ints
 '''
 def createShip():
-    return
+    row=random.randint(1,8)
+    col=random.randint(1,8)
+    ship=random.randint(0,1)
+    if ship == 0:
+        return [[row,col-1],[row,col],[row,col+1]]
+    else:
+        return [[row-1,col],[row,col],[row+1,col]]  
+    
 
 
 '''
@@ -87,7 +93,16 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def checkShip(grid, ship):
-    return
+    count=0
+    for each in ship:
+        a=each[0]
+        b=each[1]
+        if grid[a][b]==EMPTY_UNCLICKED:
+            count+=1
+            if count==len(ship):
+                return True
+        else:
+            return False
 
 
 '''
@@ -96,7 +111,17 @@ Parameters: 2D list of ints ; int
 Returns: 2D list of ints
 '''
 def addShips(grid, numShips):
-    return
+    count=0
+    while count<numShips:
+        ship=createShip()
+        if checkShip(grid,ship)==True:
+            for each in ship:
+                a=each[0]
+                b=each[1]
+                grid[a][b]=SHIP_UNCLICKED
+        count=count+1
+    return grid
+
 
 
 '''
