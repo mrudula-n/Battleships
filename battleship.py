@@ -115,13 +115,14 @@ def addShips(grid, numShips):
     count=0
     while count<numShips:
         ship=createShip()
-        if checkship(grid,ship)==True:
+        if checkShip(grid,ship)==True:
             for each in ship:
                 a=each[0]
                 b=each[1]
                 grid[a][b]=SHIP_UNCLICKED
         count=count+1
     return grid
+
 
 
 '''
@@ -300,6 +301,6 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testCheckShip()
+    test.testAddShips()
     ## Finally, run the simulation to test it manually ##
     # runSimulation(500, 500)
