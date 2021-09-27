@@ -104,7 +104,6 @@ def checkShip(grid, ship):
                 return True
         else:
             return False
-    return
 
 
 '''
@@ -113,7 +112,16 @@ Parameters: 2D list of ints ; int
 Returns: 2D list of ints
 '''
 def addShips(grid, numShips):
-    return
+    count=0
+    while count<numShips:
+        ship=createShip()
+        if checkship(grid,ship)==True:
+            for each in ship:
+                a=each[0]
+                b=each[1]
+                grid[a][b]=SHIP_UNCLICKED
+        count=count+1
+    return grid
 
 
 '''
