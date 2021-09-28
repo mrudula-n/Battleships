@@ -96,9 +96,9 @@ Returns: bool
 def checkShip(grid, ship):
     count=0
     for each in ship:
-        a=each[0]
-        b=each[1]
-        if grid[a][b]==EMPTY_UNCLICKED:
+        column=each[0]
+        row=each[1]
+        if grid[column][row]==EMPTY_UNCLICKED:
             count+=1
             if count==len(ship):
                 return True
