@@ -25,7 +25,19 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
-    return
+    data={}
+    data.update({"rows":10,"cols":10})
+    data.update({"board_size":500})
+    cell_size=data.get("board_size")/(data.get("rows")*data.get("cols"))
+    data.update({"ship":5})
+    data.update({"computer_board":emptyGrid(data.get("rows"),data.get("cols")),"user_board":emptyGrid(data.get("rows"),data.get("cols"))})
+    data.update({"computer_board":addShips(emptyGrid(data.get("rows"),data.get("cols")),data.get("ship"))})
+    return None
+    
+
+
+
+    
 
 
 '''
@@ -300,6 +312,6 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testEmptyGrid()
+    test.testMakeModel()
     ## Finally, run the simulation to test it manually ##
     # runSimulation(500, 500)
