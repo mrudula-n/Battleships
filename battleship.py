@@ -25,15 +25,16 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
-    data={}
-    data.update({"rows":10,"cols":10})
-    data.update({"board_size":500})
-    cell_size=data.get("board_size")/(data.get("rows")*data.get("cols"))
-    data.update({"ship":5})
-    data.update({"computer_board":emptyGrid(data.get("rows"),data.get("cols")),"user_board":emptyGrid(data.get("rows"),data.get("cols"))})
-    data.update({"computer_board":addShips(emptyGrid(data.get("rows"),data.get("cols")),data.get("ship"))})
-    return None
-    
+    data["rows"]=10
+    data["cols"]=10
+    data["boardSize"]=500
+    data["cellSize"]=data["boardSize"]/data["rows"]
+    data["numBoards"]=2
+    data["numShips"]=5
+    data["computerBoard"]=emptyGrid(data["rows"],data["cols"])
+    data["userBoard"]=emptyGrid(data["rows"],data["cols"])  
+    data["computerBoard"]=addShips(data["computerBoard"],data["numShips"])
+    return data
 
 
 
