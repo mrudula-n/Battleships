@@ -30,7 +30,7 @@ def makeModel(data):
     data["boardSize"]=500
     data["cellSize"]=50
     data["numShips"]=5
-    data["userBoard"]=emptyGrid(10,10)  
+    data["userBoard"]=test.testGrid()
     data["computerBoard"]=addShips(emptyGrid(10,10),data["numShips"])
     return
 
@@ -45,6 +45,8 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
+    userCanvas=drawGrid(data, userCanvas, data["userBoard"], True)
+    userCanvas=drawGrid(data, compCanvas, data["computerBoard"], True)
     return
 
 
@@ -317,6 +319,6 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testDrawGrid()
+    # test.week1Tests()
     ## Finally, run the simulation to test it manually ##
-    # runSimulation(500, 500)
+    runSimulation(500, 500)
