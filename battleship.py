@@ -32,7 +32,7 @@ def makeModel(data):
     data["numShips"]=5
     data["userBoard"]=emptyGrid(10,10)  
     data["computerBoard"]=addShips(emptyGrid(10,10),data["numShips"])
-    return data
+    return
 
 
 
