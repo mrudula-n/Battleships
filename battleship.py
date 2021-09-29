@@ -28,12 +28,10 @@ def makeModel(data):
     data["rows"]=10
     data["cols"]=10
     data["boardSize"]=500
-    data["cellSize"]=data["boardSize"]/data["rows"]
-    data["numBoards"]=2
+    data["cellSize"]=50
     data["numShips"]=5
-    data["computerBoard"]=emptyGrid(data["rows"],data["cols"])
-    data["userBoard"]=emptyGrid(data["rows"],data["cols"])  
-    data["computerBoard"]=addShips(data["computerBoard"],data["numShips"])
+    data["userBoard"]=emptyGrid(10,10)  
+    data["computerBoard"]=addShips(emptyGrid(10,10),data["numShips"])
     return data
 
 
