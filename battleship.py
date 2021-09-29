@@ -141,6 +141,12 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; 2D list of ints ; boo
 Returns: None
 '''
 def drawGrid(data, canvas, grid, showShips):
+    for i in range(data["rows"]):
+        for j in range(data["cols"]):
+            if grid[i][j]==SHIP_UNCLICKED:
+                canvas.create_rectangle(data["cellSize"]*i, data["cellSize"]*j, data["cellSize"]*(i+1), data["cellSize"]*(j+1), fill="yellow")
+            else:
+                canvas.create_rectangle(data["cellSize"]*i, data["cellSize"]*j, data["cellSize"]*(i+1), data["cellSize"]*(j+1), fill="blue")
     return
 
 
@@ -311,6 +317,6 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    test.testMakeModel()
+    test.testDrawGrid()
     ## Finally, run the simulation to test it manually ##
     # runSimulation(500, 500)
