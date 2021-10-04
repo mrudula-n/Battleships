@@ -231,6 +231,7 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def placeShip(data):
+    
     return
 
 
