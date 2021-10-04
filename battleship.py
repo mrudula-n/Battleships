@@ -35,7 +35,8 @@ def makeModel(data):
     data["user Board"] = emptyGrid(data["rows"],data["cols"]) 
     #data["userBoard"] = test.testGrid()
     data["computerBoard"] = addShips(data["computerBoard"],data["numShips"]) 
-    data["temporary_ship"]=test.testShip()
+    data["temporary_ship"]=[]
+    data["num_User_Ship"]=0
     return
 
 
@@ -72,7 +73,11 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    pass
+    cell=getClickedCell(data, event)
+    if board=="user":
+        clickUserBoard(data,cell[0],cell[1])
+    return
+
 
 #### WEEK 1 ####
 
@@ -86,7 +91,7 @@ def emptyGrid(rows, cols):
     for i in range(rows):
         col = []
         for j in range(cols):
-            col.append(1)
+            col.append(EMPTY_UNCLICKED)
         grid.append(col)
     return grid
 
@@ -100,10 +105,12 @@ def createShip():
     row=random.randint(1,8)
     col=random.randint(1,8)
     ship=random.randint(0,1)
+    emptyShip=[[]]
     if ship == 0:
-        return [[row,col-1],[row,col],[row,col+1]]
+        emptyShip=[[row,col-1],[row,col],[row,col+1]]
     else:
-        return [[row-1,col],[row,col],[row+1,col]]  
+        emptyShip=[[row-1,col],[row,col],[row+1,col]]
+    return emptyShip
     
 
 
@@ -119,10 +126,7 @@ def checkShip(grid, ship):
         row=each[1]
         if grid[column][row]==EMPTY_UNCLICKED:
             count+=1
-            if count==len(ship):
-                return True
-        else:
-            return False
+    return count==len(ship)
 
 
 '''
@@ -133,9 +137,9 @@ Returns: 2D list of ints
 def addShips(grid, numShips):
     count=0
     while count<numShips:
-        ship=createShip()
-        if checkShip(grid,ship)==True:
-            for each in ship:
+        emptyShip=createShip()
+        if checkShip(grid,emptyShip)==True:
+            for each in emptyShip:
                 column=each[0]
                 row=each[1]
                 grid[column][row]=SHIP_UNCLICKED
@@ -153,9 +157,9 @@ def drawGrid(data, canvas, grid, showShips):
     for i in range(data["rows"]):
         for j in range(data["cols"]):
             if grid[i][j]==SHIP_UNCLICKED:
-                canvas.create_rectangle(data["cellSize"]*i, data["cellSize"]*j, data["cellSize"]*(i+1), data["cellSize"]*(j+1), fill="yellow")
+                canvas.create_rectangle(data["cellSize"]*j, data["cellSize"]*i, data["cellSize"]*(j+1), data["cellSize"]*(i+1), fill="yellow")
             else:
-                canvas.create_rectangle(data["cellSize"]*i, data["cellSize"]*j, data["cellSize"]*(i+1), data["cellSize"]*(j+1), fill="blue")
+                canvas.create_rectangle(data["cellSize"]*j, data["cellSize"]*i, data["cellSize"]*(j+1), data["cellSize"]*(i+1), fill="blue")
     return
 
 
@@ -247,7 +251,7 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def clickUserBoard(data, row, col):
-    if data["num_User_ship"]==5:
+    if data["num_User_Ship"]==5:
                 print("you can start the game")
                 return
     if [row, col] not in data["temporary_ship"]:
