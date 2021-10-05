@@ -252,12 +252,12 @@ Returns: None
 '''
 def clickUserBoard(data, row, col):
     if data["num_User_Ship"]==5:
-                print("you can start the game")
-                return
+        print("you can start the game")
+        return
     if [row, col] not in data["temporary_ship"]:
-                data["temporary_ship"].append([row, col])
-                if len(data["temporary_ship"])==3:
-                        placeShip(data)
+        data["temporary_ship"].append([row, col])
+        if len(data["temporary_ship"])==3:
+            placeShip(data)
     return
 
 
