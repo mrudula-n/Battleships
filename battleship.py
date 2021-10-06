@@ -37,6 +37,7 @@ def makeModel(data):
     data["computerBoard"] = addShips(data["computerBoard"],data["numShips"]) 
     data["temporary_ship"]=[]
     data["num_User_Ship"]=0
+    data["winner"]=None
     return
 
 
@@ -50,6 +51,10 @@ def makeView(data, userCanvas, compCanvas):
     canvas= drawGrid(data,userCanvas,data["userBoard"],True)
     userCanvas=drawShip(data,userCanvas,data["temporary_ship"])
     compCanvas= drawGrid(data,compCanvas,data["computerBoard"],True)
+    if data["winner"]=="user":
+        drawGameOver(data,userCanvas)
+    elif data["winner"]=="comp":
+        drawGameOver(data,compCanvas)
     return
 
 
@@ -71,7 +76,7 @@ def mousePressed(data, event, board):
     cell=getClickedCell(data, event)
     if board=="user":
         clickUserBoard(data,cell[0],cell[1])
-    else:
+    elif board=="comp":
         runGameTurn(data,cell[0],cell[1])
     return
 
@@ -268,6 +273,8 @@ def updateBoard(data, board, row, col, player):
             board[row][col]=SHIP_CLICKED
         elif board[row][col]==EMPTY_UNCLICKED:
             board[row][col]=EMPTY_CLICKED
+    if isGameOver(board):
+        data["winner"]=player
     return
 
 
@@ -281,8 +288,8 @@ def runGameTurn(data, row, col):
         return
     else:
         updateBoard(data,data["computerBoard"],row,col,"user")
-        compGuess=getComputerGuess(data["userBoard"])
-        updateBoard(data,data["userBoard"],compGuess[0],compGuess[1],"comp")
+    compGuess=getComputerGuess(data["userBoard"])
+    updateBoard(data,data["userBoard"],compGuess[0],compGuess[1],"comp")
 
     
 
@@ -307,7 +314,11 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isGameOver(board):
-    return
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j]==SHIP_UNCLICKED:
+                return False
+    return True
 
 
 '''
@@ -316,6 +327,10 @@ Parameters: dict mapping strs to values ; Tkinter canvas
 Returns: None
 '''
 def drawGameOver(data, canvas):
+    if (data["winner"]=="user"):
+        canvas.create_text(100, 50, text="congratulations... you won the game!", fill="black", font=("Times New Roman 15 bold"))
+    if (data["winner"]=="comp"):
+        canvas.create_text(100, 50, text="You lost the game...Try again!", fill="black", font=("Times New Roman 15 bold"))
     return
 
 
@@ -374,6 +389,6 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
-    # test.testGetComputerGuess()
+    # test.testIsGameOver()
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
