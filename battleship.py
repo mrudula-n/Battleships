@@ -32,7 +32,7 @@ def makeModel(data):
     data["numBoards"] = 2
     data["numShips"] = 5
     data["computerBoard"] = emptyGrid(data["rows"],data["cols"]) 
-    data["user Board"] = emptyGrid(data["rows"],data["cols"]) 
+    data["userBoard"] = emptyGrid(data["rows"],data["cols"]) 
     #data["userBoard"] = test.testGrid()
     data["computerBoard"] = addShips(data["computerBoard"],data["numShips"]) 
     data["temporary_ship"]=[]
@@ -51,7 +51,7 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
-    canvas= drawGrid(data,userCanvas,data["user Board"],True)
+    canvas= drawGrid(data,userCanvas,data["userBoard"],True)
     userCanvas=drawShip(data,userCanvas,data["temporary_ship"])
     compCanvas= drawGrid(data,compCanvas,data["computerBoard"],True)
     return
@@ -171,14 +171,10 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    if ship[0][1]==ship[1][1]==ship[2][1]:
-        ship.sort()
-        for row in ship:
-            if ship[0][0]+1==ship[1][0]==ship[2][0]-1:
-                return True
+    ship.sort()
+    if ship[0][1]==ship[1][1]==ship[2][1]==ship[0][0]+1==ship[1][0]==ship[2][0]-1:
+        return True
     return False
-
-
 
 '''
 isHorizontal(ship)
@@ -186,11 +182,9 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isHorizontal(ship):
-    if ship[0][0]==ship[1][0]==ship[2][0]:
-        ship.sort()
-        for col in ship:
-            if ship[0][1]+1==ship[1][1]==ship[2][1]-1:
-                return True
+    ship.sort()
+    if ship[0][0]==ship[1][0]==ship[2][0]==ship[0][1]+1==ship[1][1]==ship[2][1]-1:
+        return True
     return False
 
 
@@ -235,9 +229,9 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def placeShip(data):
-    if shipIsValid(data["user Board"],data["temporary_ship"]):
+    if shipIsValid(data["userBoard"],data["temporary_ship"]):
         for ship in data["temporary_ship"]:
-            data["user Board"][ship[0]][ship[1]]=SHIP_UNCLICKED
+            data["userBoard"][ship[0]][ship[1]]=SHIP_UNCLICKED
         data["num_User_Ship"]+=1
     else:
         print("ship is not valid")
