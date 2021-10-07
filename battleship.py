@@ -290,7 +290,6 @@ def runGameTurn(data, row, col):
         updateBoard(data,data["computerBoard"],row,col,"user")
     compGuess=getComputerGuess(data["userBoard"])
     updateBoard(data,data["userBoard"],compGuess[0],compGuess[1],"comp")
-
     
 
 '''
