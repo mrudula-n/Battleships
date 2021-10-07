@@ -48,9 +48,9 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
-    canvas= drawGrid(data,userCanvas,data["userBoard"],True)
-    userCanvas=drawShip(data,userCanvas,data["temporary_ship"])
-    compCanvas= drawGrid(data,compCanvas,data["computerBoard"],True)
+    drawGrid(data,userCanvas,data["userBoard"],True)
+    drawShip(data,userCanvas,data["temporary_ship"])
+    drawGrid(data,compCanvas,data["computerBoard"],False)
     if data["winner"]=="user":
         drawGameOver(data,userCanvas)
     elif data["winner"]=="comp":
@@ -144,7 +144,7 @@ def addShips(grid, numShips):
                 column=each[0]
                 row=each[1]
                 grid[column][row]=SHIP_UNCLICKED
-        count=count+1
+            count=count+1
     return grid
 
 
@@ -179,7 +179,7 @@ Returns: bool
 '''
 def isVertical(ship):
     ship.sort()
-    if ship[0][1]==ship[1][1]==ship[2][1]==ship[0][0]+1==ship[1][0]==ship[2][0]-1:
+    if ship[0][0]+1==ship[1][0]==ship[2][0]-1 and ship[0][1]==ship[1][1]==ship[1][1]:
         return True
     return False
 
@@ -192,7 +192,7 @@ Returns: bool
 '''
 def isHorizontal(ship):
     ship.sort()
-    if ship[0][0]==ship[1][0]==ship[2][0]==ship[0][1]+1==ship[1][1]==ship[2][1]-1:
+    if ship[0][1]+1==ship[1][1]==ship[2][1]-1 and ship[0][0]==ship[1][0]==ship[1][0]:
         return True
     return False
 
@@ -326,10 +326,10 @@ Parameters: dict mapping strs to values ; Tkinter canvas
 Returns: None
 '''
 def drawGameOver(data, canvas):
-    if (data["winner"]=="user"):
-        canvas.create_text(100, 50, text="congratulations... you won the game!", fill="black", font=("Times New Roman 15 bold"))
-    if (data["winner"]=="comp"):
-        canvas.create_text(100, 50, text="You lost the game...Try again!", fill="black", font=("Times New Roman 15 bold"))
+    if(data["winner"]=="user"):
+        canvas.create_text(100, 50, text="congratulations... you won the game!", fill="black", font=("Arial 15 bold"))
+    if(data["winner"]=="comp"):
+        canvas.create_text(100, 50, text="You lost the game...Try again!", fill="black", font=("Arial 15 bold"))
     return
 
 
