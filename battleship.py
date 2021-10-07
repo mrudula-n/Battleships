@@ -38,6 +38,8 @@ def makeModel(data):
     data["temporary_ship"]=[]
     data["num_User_Ship"]=0
     data["winner"]=None
+    data["maximum_turns"]=50
+    data["current_turns"]=0
     return
 
 
@@ -54,6 +56,9 @@ def makeView(data, userCanvas, compCanvas):
     if data["winner"]=="user":
         drawGameOver(data,userCanvas)
     elif data["winner"]=="comp":
+        drawGameOver(data,compCanvas)
+    elif data["winner"]=="draw":
+        drawGameOver(data,userCanvas)
         drawGameOver(data,compCanvas)
     return
 
@@ -290,6 +295,9 @@ def runGameTurn(data, row, col):
         updateBoard(data,data["computerBoard"],row,col,"user")
     compGuess=getComputerGuess(data["userBoard"])
     updateBoard(data,data["userBoard"],compGuess[0],compGuess[1],"comp")
+    data["current_turns"]=data["current_turns"]+1
+    if data["current_turns"]==data["maximum_turns"]:
+        data["winner"]="draw"
     
 
 '''
@@ -330,6 +338,8 @@ def drawGameOver(data, canvas):
         canvas.create_text(100, 50, text="congratulations... you won the game!", fill="black", font=("Arial 15 bold"))
     if(data["winner"]=="comp"):
         canvas.create_text(100, 50, text="You lost the game...Try again!", fill="black", font=("Arial 15 bold"))
+    if(data["winner"]=="draw"):
+        canvas.create_text(100, 50, text="out of moves...draw match", fill="black", font=("Arial 15 bold"))
     return
 
 
