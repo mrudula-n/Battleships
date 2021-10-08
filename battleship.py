@@ -336,14 +336,14 @@ Returns: None
 '''
 def drawGameOver(data, canvas):
     if(data["winner"]=="user"):
-        canvas.create_text(100, 50, text="congratulations... you won the game!", fill="black", font=("Arial 15 bold"))
-        canvas.create_text(150, 70, text="press enter and play again", fill="black", font=("Arial 15 bold"))
+        canvas.create_text(200, 50, text="congratulations... you won the game!", fill="black", font=("Arial 15 bold"))
+        canvas.create_text(170, 70, text="press enter and play again", fill="black", font=("Arial 15 bold"))
     if(data["winner"]=="comp"):
-        canvas.create_text(100, 50, text="You lost the game...Try again!", fill="black", font=("Arial 15 bold"))
-        canvas.create_text(150, 70, text="press enter and play again", fill="black", font=("Arial 15 bold"))
+        canvas.create_text(200, 50, text="You lost the game...Try again!", fill="black", font=("Arial 15 bold"))
+        canvas.create_text(170, 70, text="press enter and play again", fill="black", font=("Arial 15 bold"))
     if(data["winner"]=="draw"):
-        canvas.create_text(100, 50, text="out of moves...draw match", fill="black", font=("Arial 15 bold"))
-        canvas.create_text(150, 70, text="press enter and play again", fill="black", font=("Arial 15 bold"))
+        canvas.create_text(200, 50, text="out of moves...draw match", fill="black", font=("Arial 15 bold"))
+        canvas.create_text(170, 70, text="press enter and play again", fill="black", font=("Arial 15 bold"))
     return
 
 
